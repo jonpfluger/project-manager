@@ -6,6 +6,7 @@ var timeDisplay = $('#time-display')
 var dueDateInput = $('#due-date-input')
 var projectModal = $('#project-modal')
 var projectDisplay = $('#project-display')
+var today = moment()
 
 function renderTableData (name, projectType, hourlyRate, dueDate) {
     console.log(name, projectType, hourlyRate, dueDate)
@@ -14,6 +15,13 @@ function renderTableData (name, projectType, hourlyRate, dueDate) {
     $('<td>').text(projectType).appendTo(tr)
     $('<td>').text(hourlyRate).appendTo(tr)
     $('<td>').text(dueDate).appendTo(tr)
+    // cell for the days until due date: today until dueDate
+    var daysLeft = moment(dueDate).diff(today, 'days')
+    $('<td>').text(daysLeft).appendTo(tr)
+    // cell for Potential Total Earnings ($) = hourlyRate * 8 * days
+    var potentialEarnings = (parseFloat(hourlyRate) * 8) * daysLeft
+    $('<td>').text('$' + potentialEarnings).appendTo(tr)
+
     projectDisplay.append(tr)
 }
 
@@ -40,7 +48,7 @@ function handleSubmit(event) {
 
 
 // sets current time display in header
-timeDisplay.text(moment().format('MMM Do, YYYY | hh:mm a'))
+timeDisplay.text(today.format('MMM Do, YYYY | hh:mm a'))
 
 // submit form
 projectForm.on('submit', handleSubmit)
