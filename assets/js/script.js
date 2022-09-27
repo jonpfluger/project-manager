@@ -5,6 +5,17 @@ var hourlyRateInput = $('#hourly-rate-input')
 var timeDisplay = $('#time-display')
 var dueDateInput = $('#due-date-input')
 var projectModal = $('#project-modal')
+var projectDisplay = $('#project-display')
+
+function renderTableData (name, projectType, hourlyRate, dueDate) {
+    console.log(name, projectType, hourlyRate, dueDate)
+    var tr = $('<tr>')
+    $('<td>').text(name).appendTo(tr)
+    $('<td>').text(projectType).appendTo(tr)
+    $('<td>').text(hourlyRate).appendTo(tr)
+    $('<td>').text(dueDate).appendTo(tr)
+    projectDisplay.append(tr)
+}
 
 function handleSubmit(event) {
     event.preventDefault()
@@ -14,10 +25,8 @@ function handleSubmit(event) {
     var projectType = projectTypeSelect.val()
     var hourlyRate = hourlyRateInput.val()
     var dueDate = dueDateInput.val()
-
-    console.log(name, projectType, hourlyRate, dueDate)
     
-    // show data in table
+    renderTableData(name, projectType, hourlyRate, dueDate)
 
     // hide the modal
     projectModal.modal('hide')
@@ -27,8 +36,8 @@ function handleSubmit(event) {
     projectTypeSelect.val("")
     hourlyRateInput.val("")
     dueDateInput.val("")
-
 }
+
 
 // sets current time display in header
 timeDisplay.text(moment().format('MMM Do, YYYY | hh:mm a'))
