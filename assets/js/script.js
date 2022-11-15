@@ -46,7 +46,6 @@ function handleSubmit(event) {
     dueDateInput.val("")
 }
 
-
 // sets current time display in header
 timeDisplay.text(today.format('MMM Do, YYYY | hh:mm a'))
 
@@ -55,9 +54,3 @@ projectForm.on('submit', handleSubmit)
 
 // jQuery UI datepicker
 dueDateInput.datepicker()
-
-
-
-
-
-
